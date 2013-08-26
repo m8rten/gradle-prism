@@ -9,8 +9,6 @@ repositories {
 
 dependencies {
     groovy localGroovy()
-    compile 'org.twitter4j:twitter4j-core:3.0.3'
-    compile 'org.twitter4j:twitter4j-stream:3.0.3'
     compile 'com.yammer.dropwizard:dropwizard-core:0.6.1'
     compile 'org.mongojack:mongojack:2.0.0-RC5'
     compile 'com.sun.jersey:jersey-client:1.14'
