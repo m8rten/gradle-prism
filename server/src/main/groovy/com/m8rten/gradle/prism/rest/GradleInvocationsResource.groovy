@@ -2,7 +2,7 @@ package com.m8rten.gradle.prism.rest
 
 import com.fasterxml.jackson.databind.util.JSONPObject
 import com.yammer.metrics.annotation.Timed
-import com.m8rten.gradle.prism.repository.RemoteGradleInvocationRepository
+import com.m8rten.gradle.prism.repository.GradleInvocationRepository
 
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 public class GradleInvocationsResource {
 
-    RemoteGradleInvocationRepository invocationRepository
+    GradleInvocationRepository invocationRepository
 
     @GET
     @Timed

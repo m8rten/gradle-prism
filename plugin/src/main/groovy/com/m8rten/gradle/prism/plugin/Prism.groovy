@@ -7,8 +7,7 @@ class Prism implements Plugin<Project>{
 
     @Override
     void apply(Project project) {
-        project.extensions.create('spy', Spy)
-        project.gradle.addBuildListener(new Spy())
+        project.extensions.create('spy', Spy, project)
     }
 
 }

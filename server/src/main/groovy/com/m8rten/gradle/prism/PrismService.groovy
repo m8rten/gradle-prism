@@ -2,7 +2,7 @@ package com.m8rten.gradle.prism
 
 import com.m8rten.gradle.prism.boilerplate.MongoManaged
 import com.m8rten.gradle.prism.boilerplate.PrismConfiguration
-import com.m8rten.gradle.prism.repository.RemoteGradleInvocationRepository
+import com.m8rten.gradle.prism.repository.GradleInvocationRepository
 import com.m8rten.gradle.prism.repository.TaskRepository
 import com.m8rten.gradle.prism.repository.UserRepository
 import com.m8rten.gradle.prism.rest.*
@@ -32,7 +32,7 @@ public class PrismService extends Service<PrismConfiguration> {
 
         DB db = mongo.getDB(configuration.mongodb);
 
-        RemoteGradleInvocationRepository invocationRepository = new RemoteGradleInvocationRepository(db)
+        GradleInvocationRepository invocationRepository = new GradleInvocationRepository(db)
 
         UserRepository userRepository = new UserRepository(db)
 

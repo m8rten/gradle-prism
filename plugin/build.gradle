@@ -1,22 +1,25 @@
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         if (details.requested.name == 'groovy') {
-            //prefer 'groovy' over 'groovy-all':
+            //prefer 'groovy-all' over 'groovy':
             details.useTarget group: details.requested.group, name: 'groovy-all', version: '1.8.6'
         }
     }
 }
 
-
+configurations {
+    includeInJar
+}
 
 dependencies {
-//    compile group: "org.codehaus.groovy.modules.http-builder", name: "http-builder", version: "0.5.2", transitive: false
-//    compile group: "org.codehaus.groovy.modules.http-builder", name: "http-builder", version: "0.5.2"
-//        compile "org.codehaus.groovy:groovy-all:2.1.2"
     compile "org.json:json:20090211"
-    compile('org.codehaus.groovy.modules.http-builder:http-builder:0.5.2') {
-//        transitive = false
-    }
+    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.2'
     compile gradleApi()
-    compile project(':server')
+    compile project(':shared-kernel')
+    includeInJar 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.2'
+    includeInJar project(':shared-kernel')
+}
+
+jar {
+    from { configurations.includeInJar.collect { it.isDirectory() ? it : zipTree(it) } }
 }

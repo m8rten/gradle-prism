@@ -1,8 +1,9 @@
 package com.m8rten.gradle.prism.rest
 
-import com.m8rten.gradle.prism.model.Task
+import com.m8rten.gradle.prism.model.GradleInvocation
 import com.m8rten.gradle.prism.model.RemoteGradleInvocation
-import com.m8rten.gradle.prism.repository.RemoteGradleInvocationRepository
+import com.m8rten.gradle.prism.model.Task
+import com.m8rten.gradle.prism.repository.GradleInvocationRepository
 import com.m8rten.gradle.prism.repository.TaskRepository
 import com.m8rten.gradle.prism.repository.UserRepository
 
@@ -17,7 +18,7 @@ import javax.ws.rs.core.Response
 @Produces(MediaType.APPLICATION_JSON)
 public class GradleInvocationResource {
 
-    RemoteGradleInvocationRepository invocationRepository
+    GradleInvocationRepository invocationRepository
 
     UserRepository userRepository
 
@@ -25,7 +26,11 @@ public class GradleInvocationResource {
 
     @POST
     @Consumes("application/json")
-    public Response postInvocation(RemoteGradleInvocation invocation) {
+    public Response postInvocation(RemoteGradleInvocation remoteGradleInvocation) {
+
+        GradleInvocation invocation = new GradleInvocation()
+        invocation.commandLineTasks = remoteGradleInvocation.commandLineTasks
+        invocation.userId = remoteGradleInvocation.userId
 
         Date currentDate = new Date()
         invocation.date = currentDate
