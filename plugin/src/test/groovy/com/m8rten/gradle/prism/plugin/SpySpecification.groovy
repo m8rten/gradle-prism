@@ -30,7 +30,7 @@ class SpySpecification extends Specification {
         1 * gradleInvocation.setUserId(System.getProperty('user.name'))
 
         then:
-        1 * restClient.post([path: 'asdf', body:gradleInvocation])
+        1 * restClient.post([body:gradleInvocation])
     }
 
 

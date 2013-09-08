@@ -24,7 +24,7 @@ class Spy implements BuildListener {
             gradleInvocation.userId = userName
             gradleInvocation.commandLineTasks = result.gradle.startParameter.taskNames.join(', ')
             restClient.uri = url
-            restClient.post(path: 'asdf', body: gradleInvocation)
+            restClient.post(body: gradleInvocation)
         }
     }
 
