@@ -8,8 +8,6 @@ dependencies {
     compile 'com.yammer.dropwizard:dropwizard-core:0.6.1'
     compile 'org.mongojack:mongojack:2.0.0-RC5'
     compile 'com.sun.jersey:jersey-client:1.14'
-    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0@jar'
-    testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
 mainClassName = "com.m8rten.gradle.prism.PrismService"

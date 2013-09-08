@@ -2,7 +2,7 @@
 *.iml
 *.iws
 *.ipr
-.DS_Store/
+.DS_Store
 out
 build/
 .gradle/
