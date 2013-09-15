@@ -3,9 +3,15 @@ package com.m8rten.gradle.prism.model
 import org.mongojack.Id
 
 class Task {
-    @Id String name
+    @Id final String name
     int nrOfInvocations
     Date lastInvocation
+
+    Task(String name, Date lastInvocation){
+        this.name = name
+        this.lastInvocation = lastInvocation
+        this.nrOfInvocations = 1
+    }
 
     boolean equals(o) {
         if (this.is(o)) return true

@@ -31,7 +31,7 @@ class SpySpecification extends Specification {
 
         then:
         1 * restClient.setUri('test_url')
-        1 * gradleInvocation.setCommandLineTasks("task1, task2")
+        1 * gradleInvocation.setCommandLineTasks(['task1', 'task2'])
         1 * gradleInvocation.setUserId(System.getProperty('user.name'))
 
         then:

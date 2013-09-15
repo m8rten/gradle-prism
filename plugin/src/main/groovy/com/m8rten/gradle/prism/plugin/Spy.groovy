@@ -42,7 +42,7 @@ class Spy implements BuildListener {
 
     private void loadGradleInvocationWith(BuildResult result){
         gradleInvocation.userId = userName
-        gradleInvocation.commandLineTasks = result.gradle.startParameter.taskNames.join(', ')
+        gradleInvocation.commandLineTasks = result.gradle.startParameter.taskNames
     }
 
     private void postGradleInvocation(){

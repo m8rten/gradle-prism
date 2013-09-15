@@ -42,4 +42,16 @@ class UserRepository {
 //        users.find().toArray()
         users.find().sort(DBSort.desc("lastInvocation")).toArray();
     }
+
+    void insert(User user){
+
+    }
+
+    User get(String userName){
+        users.findOneById(userName)
+    }
+
+    void update(User user){
+
+    }
 }

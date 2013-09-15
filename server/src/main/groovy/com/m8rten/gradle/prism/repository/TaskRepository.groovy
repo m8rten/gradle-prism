@@ -24,10 +24,18 @@ class TaskRepository {
     }
 
     boolean contains(Task task) {
-        tasks.findOneById(task.name) != null
+        contains(task.name)
     }
 
     List<Task> getAll() {
         tasks.find().sort(DBSort.desc("lastInvocation")).toArray();
+    }
+
+    Task get(String name) {
+        tasks.findOneById(name)
+    }
+
+    boolean contains(String taskName){
+        tasks.findOneById(taskName) != null
     }
 }

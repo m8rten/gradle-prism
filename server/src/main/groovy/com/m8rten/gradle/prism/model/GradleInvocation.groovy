@@ -5,6 +5,6 @@ import org.mongojack.Id
 class GradleInvocation {
     @Id public String id;
     String userId
-    String commandLineTasks
+    List<String> commandLineTasks
     Date date
 }
