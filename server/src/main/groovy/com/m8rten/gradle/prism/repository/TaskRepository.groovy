@@ -15,16 +15,11 @@ class TaskRepository {
     }
 
     void update(Task task) {
-        task.nrOfInvocations += tasks.findOneById(task.name).nrOfInvocations
         tasks.updateById(task.name,task)
     }
 
     void insert(Task task){
         tasks.insert(task)
-    }
-
-    boolean contains(Task task) {
-        contains(task.name)
     }
 
     List<Task> getAll() {

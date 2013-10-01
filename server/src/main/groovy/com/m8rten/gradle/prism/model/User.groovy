@@ -1,8 +1,9 @@
 package com.m8rten.gradle.prism.model
 
+import groovy.transform.TupleConstructor
 import org.mongojack.Id
 
-class User {
+@TupleConstructor class User {
     @Id final String userId
     Date lastInvocation
     List<Task> tasks
@@ -14,4 +15,6 @@ class User {
         this.nrOfInvocations = 1
         this.tasks = []
     }
+
+    User(){}
 }

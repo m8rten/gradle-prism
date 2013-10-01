@@ -6,13 +6,15 @@ function createGradleInvocationStatistics() {
         success: function (stats) {
             var dates= [];
             var nrOfInvocations = [];
+            var nrOfUsers = [];
 
             for (i = 0; i < stats.length; i++) {
                 dates.push(new Date(stats[i].date).getDate().toLocaleString());
                 nrOfInvocations.push(stats[i].nrOfInvocations);
+                nrOfUsers.push(stats[i].nrOfUsers)
             }
 
-            var data = {
+            var invocationData = {
                 labels : dates.reverse(),
                 datasets : [
                     {
@@ -25,14 +27,35 @@ function createGradleInvocationStatistics() {
             }
 
 
+            var userData = {
+                labels : dates.reverse(),
+                datasets : [
+                    {
+                        fillColor : "black",
+                        strokeColor : "white",
+
+                        data : nrOfUsers.reverse()
+                    }
+                ]
+            }
+
+
             var canvas = document.getElementById("gradle-invocations-chart")
             var context = canvas.getContext("2d");
-
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.beginPath();
             canvas.width = $("#gradle-invocations-box").width()*0.9;
-            canvas.height = 100;//$("#gradle-invocations-box").height();
-            new Chart(context).Bar(data,options);
+            canvas.height = 200;
+            new Chart(context).Bar(invocationData,options);
+
+
+            var canvas1 = document.getElementById("gradle-user-chart")
+            var context1 = canvas1.getContext("2d");
+            context1.clearRect(0, 0, canvas1.width, canvas1 .height);
+            context1.beginPath();
+            canvas1.width = $("#gradle-user-box").width()*0.9;
+            canvas1.height = 200;
+            new Chart(context1).Bar(userData,options);
 
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -137,7 +160,7 @@ function updateSite(){
     createGradleInvocations()
     createUsers()
     createTasks()
-    setTimeout(updateSite, 1000)
+    setTimeout(updateSite, 5000)
 }
 
 createGradleInvocationStatistics()

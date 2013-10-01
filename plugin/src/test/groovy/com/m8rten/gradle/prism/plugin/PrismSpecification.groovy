@@ -6,8 +6,6 @@ import spock.lang.Specification
 
 class PrismSpecification extends Specification {
 
-
-
     def 'adds spy extensions'(){
         given:
         Project project = ProjectBuilder.builder().build()

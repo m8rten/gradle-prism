@@ -24,7 +24,7 @@ class SpySpecification extends Specification {
 
     def 'Posts gradle invocations when build is finished'(){
         given:
-        'Spy with rest client, gradle invocation and ruild result'()
+        'Spy with rest client, gradle invocation and build result'()
 
         when:
         spy.buildFinished(buildResult)
@@ -40,7 +40,7 @@ class SpySpecification extends Specification {
 
     def "Doesn't post gradle invocation when build is finished when user name is filtered"(){
         given:
-        'Spy with rest client, gradle invocation and ruild result'()
+        'Spy with rest client, gradle invocation and build result'()
 
         and:
         spy.filter(System.getProperty('user.name'))
@@ -54,7 +54,7 @@ class SpySpecification extends Specification {
 
     def "Crashes silently aka doesn't revel itself when mission has failed"(){
         given:
-        'Spy with rest client, gradle invocation and ruild result'()
+        'Spy with rest client, gradle invocation and build result'()
 
         and: 'Using real RESTClient but with fucked up url'
         spy.restClient = new RESTClient()
@@ -70,14 +70,14 @@ class SpySpecification extends Specification {
         given:
 
         when:
-        'Spy with rest client, gradle invocation and ruild result'()
+        'Spy with rest client, gradle invocation and build result'()
 
         then:
         /* TODO: SHOULD BE SPY INSTANCE SPECIFIC */
         1 * gradle.addBuildListener(_)
     }
 
-    def 'Spy with rest client, gradle invocation and ruild result'(){
+    def 'Spy with rest client, gradle invocation and build result'(){
         def startParameter = Mock(StartParameter)
         startParameter.getTaskNames() >> ['task1','task2']
         gradle.getStartParameter() >> startParameter
