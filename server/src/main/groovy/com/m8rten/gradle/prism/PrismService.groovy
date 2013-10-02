@@ -24,7 +24,7 @@ public class PrismService extends Service<PrismConfiguration> {
     @Override
     public void initialize(Bootstrap<PrismConfiguration> bootstrap) {
         bootstrap.setName("gradle-prism");
-        bootstrap.addBundle(new AssetsBundle("/assets", "/"))
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/"))
     }
 
     @Override

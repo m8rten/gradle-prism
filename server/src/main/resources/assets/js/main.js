@@ -1,10 +1,10 @@
-function createGradleInvocationStatistics() {
+function createStatistics() {
     $.ajax({
         type: "GET",
         dataType: "jsonp",
         url: "http://localhost:8080/api/invocations/statistics/10",
         success: function (stats) {
-            var dates= [];
+            var dates = [];
             var nrOfInvocations = [];
             var nrOfUsers = [];
 
@@ -14,49 +14,8 @@ function createGradleInvocationStatistics() {
                 nrOfUsers.push(stats[i].nrOfUsers)
             }
 
-            var invocationData = {
-                labels : dates.reverse(),
-                datasets : [
-                    {
-                        fillColor : "black",
-                        strokeColor : "white",
-
-                        data : nrOfInvocations.reverse()
-                    }
-                ]
-            }
-
-
-            var userData = {
-                labels : dates.reverse(),
-                datasets : [
-                    {
-                        fillColor : "black",
-                        strokeColor : "white",
-
-                        data : nrOfUsers.reverse()
-                    }
-                ]
-            }
-
-
-            var canvas = document.getElementById("gradle-invocations-chart")
-            var context = canvas.getContext("2d");
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.beginPath();
-            canvas.width = $("#gradle-invocations-box").width()*0.9;
-            canvas.height = 200;
-            new Chart(context).Bar(invocationData,options);
-
-
-            var canvas1 = document.getElementById("gradle-user-chart")
-            var context1 = canvas1.getContext("2d");
-            context1.clearRect(0, 0, canvas1.width, canvas1 .height);
-            context1.beginPath();
-            canvas1.width = $("#gradle-user-box").width()*0.9;
-            canvas1.height = 200;
-            new Chart(context1).Bar(userData,options);
-
+            drawGraph("gradle-invocations-chart", dates, nrOfInvocations)
+            drawGraph("gradle-user-chart", dates, nrOfUsers)
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.log('error!')
@@ -64,7 +23,29 @@ function createGradleInvocationStatistics() {
     });
 }
 
-function createGradleInvocations() {
+
+function drawGraph(canvasId, lables, data) {
+    var canvas = document.getElementById(canvasId)
+    var context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
+    canvas.width = $("#gradle-user-box").width() * 0.9;
+    canvas.height = 200;
+    new Chart(context).Bar({
+        labels: lables,
+        datasets: [
+            {
+                fillColor: "black",
+                strokeColor: "white",
+
+                data: data.reverse()
+            }
+        ]
+    }, options);
+}
+
+
+function createListOfGradleInvocations() {
     $.ajax({
         type: "GET",
         dataType: "jsonp",
@@ -74,7 +55,7 @@ function createGradleInvocations() {
             var invocations = document.getElementById('gradle-invocations');
             invocations.innerHTML = '';
             for (i = 0; i < restInvocations.length; i++) {
-                invocations.innerHTML += createInvocationHTMLString(restInvocations[i]);
+                invocations.innerHTML += invocationHTMLString(restInvocations[i]);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -83,7 +64,7 @@ function createGradleInvocations() {
     });
 }
 
-function createUsers() {
+function createListOfUsers() {
     $.ajax({
         type: "GET",
         dataType: "jsonp",
@@ -91,7 +72,7 @@ function createUsers() {
         success: function (users) {
             document.getElementById('user-list').innerHTML = '';
             for (i = 0; i < users.length; i++) {
-                document.getElementById('user-list').innerHTML += createUserHTMLString(users[i]);
+                document.getElementById('user-list').innerHTML += userHTMLString(users[i]);
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -100,7 +81,7 @@ function createUsers() {
     });
 }
 
-function createTasks() {
+function createListOfTasks() {
     $.ajax({
         type: "GET",
         dataType: "jsonp",
@@ -117,11 +98,12 @@ function createTasks() {
     });
 }
 
-function createInvocationHTMLString(restInvocation){
-    return '<li class="gradle-invocation">'+new Date(restInvocation.date).toLocaleString() + ' : ' + restInvocation.userId + ' : ' + restInvocation.commandLineTasks;+'</li>';
+function invocationHTMLString(restInvocation) {
+    return '<li class="gradle-invocation">' + new Date(restInvocation.date).toLocaleString() + ' : ' + restInvocation.userId + ' : ' + restInvocation.commandLineTasks;
+    +'</li>';
 }
 
-function createUserHTMLString(user) {
+function userHTMLString(user) {
     var html = "<li class='big-list-item' id='" + user.userId + "'>" +
         "<dl>" +
         "    <dt>userId:</dt>" +
@@ -135,7 +117,7 @@ function createUserHTMLString(user) {
     $.each(user.tasks, function (key, value) {
         html += '<b>' + value.name + ':</b> ' + value.nrOfInvocations + ', '
     })
-    html = html.slice(0,-2)
+    html = html.slice(0, -2)
     html += "        </dd>" +
         "    </dl>" +
         "</li>";
@@ -156,12 +138,12 @@ function createTaskHTMLString(task) {
     return html
 }
 
-function updateSite(){
-    createGradleInvocations()
-    createUsers()
-    createTasks()
+function updateSite() {
+    createListOfGradleInvocations()
+    createListOfUsers()
+    createListOfTasks()
     setTimeout(updateSite, 5000)
 }
 
-createGradleInvocationStatistics()
+createStatistics()
 updateSite()
