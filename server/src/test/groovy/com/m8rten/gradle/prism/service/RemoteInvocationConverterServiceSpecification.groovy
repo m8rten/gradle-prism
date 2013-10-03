@@ -72,8 +72,8 @@ class RemoteInvocationConverterServiceSpecification extends Specification {
             insertedUser.lastInvocation == converterService.date &&
             insertedUser.nrOfInvocations == 1 &&
             insertedUser.userId == 'userId' &&
-            insertedUser.tasks.get(0).name == 'task1' //&&
-//            insertedUser.tasks.get(1).name == 'task2'
+            insertedUser.tasks.get(0).name == 'task1' &&
+            insertedUser.tasks.get(1).name == 'task2'
         })
     }
 
