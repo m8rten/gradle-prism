@@ -11,11 +11,11 @@ import javax.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 public class GradleInvocationResource {
 
-    GradleInvocationRepository invocationRepository
+    GradleInvocationRepository invocations
 
     @GET
     @Timed
     public JSONPObject getInvocations(@QueryParam("callback") String callback, @PathParam("nr") int nr) {
-        new JSONPObject(callback,invocationRepository.getInvocations(nr))
+        new JSONPObject(callback, invocations.latest(nr))
     }
 }

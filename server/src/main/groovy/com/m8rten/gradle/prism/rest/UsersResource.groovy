@@ -14,11 +14,11 @@ import javax.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 public class UsersResource {
 
-    UserRepository userRepository
+    UserRepository users
 
     @GET
     @Timed
     public JSONPObject getInvocations(@QueryParam("callback") String callback) {
-        new JSONPObject(callback,userRepository.getAll())
+        new JSONPObject(callback, users.all())
     }
 }

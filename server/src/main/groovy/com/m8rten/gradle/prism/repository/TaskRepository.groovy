@@ -22,15 +22,15 @@ class TaskRepository {
         tasks.insert(task)
     }
 
-    List<Task> getAll() {
+    List<Task> all() {
         tasks.find().sort(DBSort.desc("lastInvocation")).toArray();
     }
 
-    Task get(String name) {
+    Task withName(String name) {
         tasks.findOneById(name)
     }
 
-    boolean contains(String taskName){
+    boolean containsName(String taskName){
         tasks.findOneById(taskName) != null
     }
 }

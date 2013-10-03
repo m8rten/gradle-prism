@@ -10,11 +10,11 @@ import javax.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 public class StatisticsResource {
 
-    StatisticsRepository statisticsRepository
+    StatisticsRepository statistics
 
     @GET
     @Timed
     public JSONPObject getInvocations(@QueryParam("callback") String callback, @PathParam("nr") int nr) {
-        new JSONPObject(callback, statisticsRepository.getInvocationStatistics(nr))
+        new JSONPObject(callback, statistics.latest(nr))
     }
 }

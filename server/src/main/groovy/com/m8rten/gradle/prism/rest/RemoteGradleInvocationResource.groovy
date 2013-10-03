@@ -1,7 +1,7 @@
 package com.m8rten.gradle.prism.rest
 
 import com.m8rten.gradle.prism.model.RemoteGradleInvocation
-import com.m8rten.gradle.prism.services.RemoteInvocationConverterService
+import com.m8rten.gradle.prism.service.RemoteInvocationConverterService
 
 import javax.ws.rs.Consumes
 import javax.ws.rs.POST
@@ -14,13 +14,12 @@ import javax.ws.rs.core.Response
 @Produces(MediaType.APPLICATION_JSON)
 public class RemoteGradleInvocationResource {
 
-    RemoteInvocationConverterService converterService;
-
+    RemoteInvocationConverterService converter
 
     @POST
     @Consumes("application/json")
     public Response postInvocation(RemoteGradleInvocation remoteGradleInvocation) {
-        converterService.save(remoteGradleInvocation)
+        converter.saveInformationRegarding(remoteGradleInvocation)
         Response.noContent().build()
     }
 }

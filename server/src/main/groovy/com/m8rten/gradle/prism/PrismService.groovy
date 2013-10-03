@@ -7,7 +7,7 @@ import com.m8rten.gradle.prism.repository.StatisticsRepository
 import com.m8rten.gradle.prism.repository.TaskRepository
 import com.m8rten.gradle.prism.repository.UserRepository
 import com.m8rten.gradle.prism.rest.*
-import com.m8rten.gradle.prism.services.RemoteInvocationConverterService
+import com.m8rten.gradle.prism.service.RemoteInvocationConverterService
 import com.mongodb.DB
 import com.mongodb.Mongo
 import com.yammer.dropwizard.Service
@@ -33,24 +33,23 @@ public class PrismService extends Service<PrismConfiguration> {
         Mongo mongo = new Mongo(configuration.mongohost, configuration.mongoport)
         DB db = mongo.getDB(configuration.mongodb);
 
-        GradleInvocationRepository invocationRepository = new GradleInvocationRepository(db)
-        UserRepository userRepository = new UserRepository(db)
-        TaskRepository taskRepository = new TaskRepository(db)
-        StatisticsRepository statisticsRepository = new StatisticsRepository(db)
+        GradleInvocationRepository invocations = new GradleInvocationRepository(db)
+        UserRepository users = new UserRepository(db)
+        TaskRepository tasks = new TaskRepository(db)
+        StatisticsRepository statistics = new StatisticsRepository(db)
 
-        RemoteInvocationConverterService converterService = new RemoteInvocationConverterService(
-                invocationRepository,
-                userRepository,
-                taskRepository,
-                statisticsRepository)
+        RemoteInvocationConverterService converter = new RemoteInvocationConverterService(
+                invocations,
+                users,
+                tasks,
+                statistics)
 
         MongoManaged mongoManaged = new MongoManaged(mongo);
         environment.manage(mongoManaged);
-        environment.addResource(new RemoteGradleInvocationResource(converterService: converterService));
-        environment.addResource(new UsersResource(userRepository: userRepository))
-        environment.addResource(new TasksResource(taskRepository: taskRepository))
-        environment.addResource(new StatisticsResource(statisticsRepository: statisticsRepository))
-        environment.addResource(new GradleInvocationResource(invocationRepository: invocationRepository))
-
+        environment.addResource(new RemoteGradleInvocationResource(converter: converter));
+        environment.addResource(new UsersResource(users: users))
+        environment.addResource(new TasksResource(tasks: tasks))
+        environment.addResource(new StatisticsResource(statistics: statistics))
+        environment.addResource(new GradleInvocationResource(invocations: invocations))
     }
 }

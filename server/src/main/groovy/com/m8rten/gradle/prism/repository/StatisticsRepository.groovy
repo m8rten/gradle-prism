@@ -15,7 +15,7 @@ class StatisticsRepository {
         statistics = JacksonDBCollection.wrap(db.getCollection("gradleInvocationsStatistics"), StatisticsForOneDay.class, Date.class)
     }
 
-    StatisticsForOneDay get(Date day){
+    StatisticsForOneDay withDate(Date day){
         statistics.findOneById(day)
     }
 
@@ -27,7 +27,7 @@ class StatisticsRepository {
         statistics.updateById(day, nrOfInvocationsForOneDay)
     }
 
-    List<StatisticsForOneDay> getInvocationStatistics(int nr) {
+    List<StatisticsForOneDay> latest(int nr) {
         statistics.find().sort(DBSort.desc("\$natural")).limit(nr).toArray();
     }
 

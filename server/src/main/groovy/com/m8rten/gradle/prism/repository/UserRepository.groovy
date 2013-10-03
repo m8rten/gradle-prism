@@ -16,11 +16,11 @@ class UserRepository {
         users = JacksonDBCollection.wrap(db.getCollection("users"), User.class, String.class)
     }
 
-    boolean contains(String userId) {
+    boolean containsName(String userId) {
         users.findOneById(userId) != null
     }
 
-    List<User> getAll() {
+    List<User> all() {
         users.find().sort(DBSort.desc("lastInvocation")).toArray();
     }
 
@@ -28,7 +28,7 @@ class UserRepository {
         users.insert(user)
     }
 
-    User get(String userName){
+    User withName(String userName){
         users.findOneById(userName)
     }
 

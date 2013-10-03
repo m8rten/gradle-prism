@@ -14,7 +14,7 @@ class StatisticsForOneDay {
 
     public StatisticsForOneDay(){}
 
-    public addInvocation(String userName){
+    public countInvocationBy(String userName){
         nrOfInvocations++
         if(!userNames.contains(userName))
             userNames.add(userName)

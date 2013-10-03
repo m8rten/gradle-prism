@@ -14,11 +14,11 @@ import javax.ws.rs.core.MediaType
 @Produces(MediaType.APPLICATION_JSON)
 public class TasksResource {
 
-    TaskRepository taskRepository
+    TaskRepository tasks
 
     @GET
     @Timed
     public JSONPObject getInvocations(@QueryParam("callback") String callback) {
-        new JSONPObject(callback,taskRepository.getAll())
+        new JSONPObject(callback, tasks.all())
     }
 }

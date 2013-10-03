@@ -4,25 +4,17 @@ import org.mongojack.Id
 
 class Task {
     @Id final String name
-    int nrOfInvocations
+    int nrOfInvocations = 0
     Date lastInvocation
 
-    Task(String name, Date lastInvocation){
+    Task(String name){
         this.name = name
-        this.lastInvocation = lastInvocation
-        this.nrOfInvocations = 1
+    }
+
+    void wasRunAt(Date date){
+        nrOfInvocations++
+        lastInvocation = date
     }
 
     Task(){}
-
-//    boolean equals(o) {
-//        if (this.is(o)) return true
-//        if (getClass() != o.class) return false
-//        if (name != ((Task) o).name) return false
-//        return true
-//    }
-//
-//    int hashCode() {
-//        return (name != null ? name.hashCode() : 0)
-//    }
 }

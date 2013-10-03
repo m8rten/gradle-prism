@@ -19,7 +19,7 @@ class GradleInvocationRepository {
         invocations.insert(invocation)
     }
 
-    List<GradleInvocation> getInvocations(int nr){
+    List<GradleInvocation> latest(int nr){
         invocations.find().sort(DBSort.desc("\$natural")).limit(nr).toArray();
     }
 }

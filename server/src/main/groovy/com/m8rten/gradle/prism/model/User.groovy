@@ -1,19 +1,31 @@
 package com.m8rten.gradle.prism.model
 
-import groovy.transform.TupleConstructor
 import org.mongojack.Id
 
-@TupleConstructor class User {
+class User {
     @Id final String userId
     Date lastInvocation
-    List<Task> tasks
+    List<Task> tasks = []
     int nrOfInvocations
 
-    User(String userId, Date date){
-        this.userId = userId
-        this.lastInvocation = date
-        this.nrOfInvocations = 1
-        this.tasks = []
+    User(String userId){
+        this.userId = userId;
+    }
+
+    void invoked(RemoteGradleInvocation remoteGradleInvocation, Date date){
+        lastInvocation = date;
+        nrOfInvocations++;
+        tasks.findAll {remoteGradleInvocation.commandLineTasks.contains(it.name)}.each{
+            it.lastInvocation = date
+            it.nrOfInvocations++
+        }
+        remoteGradleInvocation.commandLineTasks.each { String taskName ->
+            if (tasks.find { it.name == taskName } == null){
+                Task task = new Task(taskName)
+                task.wasRunAt(date)
+                tasks.add(task)
+            }
+        }
     }
 
     User(){}
