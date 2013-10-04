@@ -1,0 +1,25 @@
+apply plugin: 'application'
+
+dependencies {
+    compile 'com.yammer.dropwizard:dropwizard-core:0.6.1'
+    compile 'org.mongojack:mongojack:2.0.0-RC5'
+    compile 'com.sun.jersey:jersey-client:1.14'
+    compile project(':shared-kernel')
+}
+
+mainClassName = "com.m8rten.gradle.prism.PrismService"
+
+applicationDistribution.from(".") {
+   include "prism.yml"
+   into 'bin'
+}
+
+startScripts {
+    doLast {
+        unixScript.text = unixScript.text.replace(mainClassName, mainClassName + ' server prism.yml')
+        windowsScript.text = windowsScript.text.replace(mainClassName, mainClassName + ' server prism.yml')
+    }
+}
+
+
+
