@@ -39,7 +39,6 @@ public class PrismConfiguration extends Configuration implements AssetsBundleCon
     @JsonProperty @NotEmpty
     public String mongodb = "prismdb";
 
-
     @Valid
     @NotNull
     @JsonProperty

@@ -1,6 +1,6 @@
 package com.m8rten.gradle.prism.rest
 
-import com.m8rten.gradle.prism.query.GraphAttributes
+
 import com.m8rten.gradle.prism.query.Query
 import com.m8rten.gradle.prism.query.QueryContainer
 import com.yammer.metrics.annotation.Timed
@@ -57,34 +57,6 @@ public class QueryResource {
         query(id).waitUntilUpdated()
         Response.ok().build()
     }
-
-//    @GET
-//    @Consumes("application/json")
-//    @Path("{uuid}/graph")
-//    public Response getGraphAttributes(@PathParam("queryUuid") String id) {
-//        Response.ok(query(id).graphAttributes(), MediaType.APPLICATION_JSON).build()
-//    }
-//
-//    @POST
-//    @Consumes("application/json")
-//    @Path("{queryUuid}/graph")
-//    public Response addOrUpdateGraph(@PathParam("queryUuid") String id, GraphAttributes graphAttributes) {
-//        Response.ok(query(id).createOrChangeFor(graphAttributes), MediaType.APPLICATION_JSON).build()
-//    }
-//
-//    @GET
-//    @Consumes("application/json")
-//    @Path("{queryUuid}/graph/{graphUuid}/attributes")
-//    public Response getGraphAttribute(@PathParam("queryUuid") String id, @PathParam("graphUuid") String graphId) {
-//        Response.ok(query(id).graphAttributes(graphId), MediaType.APPLICATION_JSON).build()
-//    }
-//
-//    @GET
-//    @Consumes("application/json")
-//    @Path("{queryUuid}/graph/{graphUuid}/data")
-//    public Response getGraphData(@PathParam("queryUuid") String queryId,@PathParam("graphUuid") String graphId) {
-//        Response.ok(query(queryId).graphData(graphId), MediaType.APPLICATION_JSON).build()
-//    }
 
     Query query(String id){
         queries.get(id)

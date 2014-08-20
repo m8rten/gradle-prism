@@ -23,11 +23,6 @@ class Query implements InvocationListener {
         this.mongoQuery = mongoQuery
         this.repository = repository
         this.repository.addInvocationListener(this)
-        run()
-        //GraphAttributes dummy = new GraphAttributes()
-        //dummy.type = 'day'
-        //dummy.name = 'test graph'
-        //graphAttributes.put(dummy.id,dummy)
     }
 
     void run(){
@@ -49,7 +44,6 @@ class Query implements InvocationListener {
     @Override
     void invocationHasHappend(InvocationEvent event) {
         run()
-        println "HALLÅ"
         noNewInvocations=false
     }
 }

@@ -14,11 +14,14 @@ class QueryContainer {
 
     Query addOrUpdate(Query queryTemplate) {
         if(contains(queryTemplate.id)){
-            queries.get(queryTemplate.id).changeAttributesFrom(queryTemplate)
-            get(queryTemplate.id)
+            Query query = get(queryTemplate.id)
+            query.changeAttributesFrom(queryTemplate)
+            query.run()
+            query
         } else {
             Query query = new Query(queryTemplate.name, queryTemplate.mongoQuery, repository)
             queries.put(query.id, query)
+            query.run()
             query
         }
     }
