@@ -1,12 +1,12 @@
 buildscript {
     dependencies {
-        classpath files("../../../build/libs/plugin.jar")
+        classpath files("../../../build/libs/plugin-HEAD-SNAPSHOT.jar")
     }
 }
 
 apply plugin: 'prism'
 
 spy {
-    url 'http://localhost:8080/api/invocation/'
-    filter 'Marten'
+    url 'http://localhost:8080/api/superinvocation/'
+    filter 'Jenkins'
 }

@@ -1,10 +1,12 @@
 package com.m8rten.gradle.prism.plugin
-import com.m8rten.gradle.prism.model.RemoteGradleInvocation
+
+import com.m8rten.gradle.prism.model.SuperUser
 import groovyx.net.http.ContentType
 import groovyx.net.http.RESTClient
 import org.gradle.BuildListener
 import org.gradle.BuildResult
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.initialization.Settings
 import org.gradle.api.invocation.Gradle
 
@@ -18,10 +20,13 @@ class Spy implements BuildListener {
 
     String userName = System.getProperty('user.name')
 
-    RemoteGradleInvocation gradleInvocation = new RemoteGradleInvocation()
+    RemoteGradleInvocationBuilder superGradleInvocation = new RemoteGradleInvocationBuilder()
 
     Spy(Project project) {
         project.gradle.addBuildListener(this)
+        project.gradle.taskGraph.afterTask {Task task ->
+            superGradleInvocation.add(task)
+        }
     }
 
     void filter(String... strings) {
@@ -30,40 +35,34 @@ class Spy implements BuildListener {
 
     @Override
     void buildFinished(BuildResult buildResult) {
-        if (userIsAllowedToSpyAt()) {
-            loadGradleInvocationWith(buildResult)
-            postGradleInvocation()
+        superGradleInvocation.user = new SuperUser(name: userName)
+        restClient.uri = url
+        restClient.contentType = ContentType.JSON
+        try {
+            restClient.post(body: superGradleInvocation)
+        } catch (Exception e) {
+            // Shhh... be quiet...
         }
+
     }
 
     private boolean userIsAllowedToSpyAt(){
         !filter.contains(userName)
     }
 
-    private void loadGradleInvocationWith(BuildResult result){
-        gradleInvocation.userId = userName
-        gradleInvocation.commandLineTasks = result.gradle.startParameter.taskNames
-    }
-
-    private void postGradleInvocation(){
-        restClient.uri = url
-        restClient.contentType = ContentType.JSON
-        try {
-            restClient.post(body: gradleInvocation)
-        } catch (Exception e) {
-            // Shhh... be quiet...
-        }
+    @Override
+    void buildStarted(Gradle gradle) {
     }
 
     @Override
-    void buildStarted(Gradle gradle) {}
+    void projectsEvaluated(Gradle gradle) {
+    }
 
     @Override
-    void projectsEvaluated(Gradle gradle) {}
+    void projectsLoaded(Gradle gradle) {
+    }
 
     @Override
-    void projectsLoaded(Gradle gradle) {}
-
-    @Override
-    void settingsEvaluated(Settings settings) {}
+    void settingsEvaluated(Settings settings) {
+    }
 }
