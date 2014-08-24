@@ -1,6 +1,8 @@
-package com.m8rten.gradle.prism.query
+package com.m8rten.gradle.prism.model.query
 
-import com.m8rten.gradle.prism.repository.InvocationRepository
+import com.m8rten.gradle.prism.model.invocation.InvocationEvent
+import com.m8rten.gradle.prism.model.invocation.InvocationListener
+import com.m8rten.gradle.prism.model.invocation.InvocationRepository
 
 class Query implements InvocationListener {
 
@@ -29,7 +31,7 @@ class Query implements InvocationListener {
         result.updateWith(repository.run(mongoQuery))
     }
 
-    void changeAttributesFrom(Query query) {
+    void changeAttributesToMatch(Query query) {
         this.name = query.name
         this.mongoQuery = query.mongoQuery
     }

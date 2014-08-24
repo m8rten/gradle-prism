@@ -1,6 +1,5 @@
 package com.m8rten.gradle.prism.model
 
-class SuperProject {
-    List<SuperTask> tasks = []
+class User {
     String name
 }

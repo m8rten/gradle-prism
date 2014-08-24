@@ -2,10 +2,10 @@ package com.m8rten.gradle.prism
 import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle
 import com.m8rten.gradle.prism.boilerplate.MongoManaged
 import com.m8rten.gradle.prism.boilerplate.PrismConfiguration
-import com.m8rten.gradle.prism.query.QueryContainer
-import com.m8rten.gradle.prism.repository.InvocationRepository
+import com.m8rten.gradle.prism.model.query.QueryContainer
+import com.m8rten.gradle.prism.model.invocation.InvocationRepository
 import com.m8rten.gradle.prism.rest.QueryResource
-import com.m8rten.gradle.prism.rest.SuperRemoteGradleInvocationResource
+import com.m8rten.gradle.prism.rest.RemoteGradleInvocationResource
 import com.mongodb.DB
 import com.mongodb.Mongo
 import com.yammer.dropwizard.Service
@@ -35,7 +35,7 @@ public class PrismService extends Service<PrismConfiguration> {
 
         MongoManaged mongoManaged = new MongoManaged(mongo);
         environment.manage(mongoManaged);
-        environment.addResource(new SuperRemoteGradleInvocationResource(invocations: superInvocations))
+        environment.addResource(new RemoteGradleInvocationResource(invocations: superInvocations))
         environment.addResource(new QueryResource(queries: containter))
     }
 }

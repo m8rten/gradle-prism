@@ -1,6 +1,7 @@
 package com.m8rten.gradle.prism.query
 
-import com.m8rten.gradle.prism.repository.InvocationRepository
+import com.m8rten.gradle.prism.model.invocation.InvocationRepository
+import com.m8rten.gradle.prism.model.query.QueryContainer
 import spock.lang.Specification
 
 class QueryContainerSpecification extends Specification{

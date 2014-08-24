@@ -1,6 +1,5 @@
-package com.m8rten.gradle.prism.query
-
-import com.m8rten.gradle.prism.repository.InvocationRepository
+package com.m8rten.gradle.prism.model.query
+import com.m8rten.gradle.prism.model.invocation.InvocationRepository
 
 class QueryContainer {
 
@@ -12,18 +11,18 @@ class QueryContainer {
         this.repository = repository
     }
 
-    Query addOrUpdate(Query queryTemplate) {
-        if(contains(queryTemplate.id)){
-            Query query = get(queryTemplate.id)
-            query.changeAttributesFrom(queryTemplate)
-            query.run()
-            query
-        } else {
-            Query query = new Query(queryTemplate.name, queryTemplate.mongoQuery, repository)
-            queries.put(query.id, query)
-            query.run()
-            query
-        }
+    Query add(Query queryTemplate){
+        Query query = new Query(queryTemplate.name, queryTemplate.mongoQuery, repository)
+        queries.put(query.id, query)
+        query.run()
+        query
+    }
+
+    Query update(Query queryTemplate){
+        Query query = get(queryTemplate.id)
+        query.changeAttributesToMatch(queryTemplate)
+        query.run()
+        query
     }
 
     Query delete(String id) {

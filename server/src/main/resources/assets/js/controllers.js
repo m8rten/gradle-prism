@@ -28,17 +28,14 @@ gradlePrismControllers.controller('QueryContainerCtrl',  ['$scope', 'Query', fun
 }]);
 
 
-gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', 'Graph', function QueryCtrl($scope, Query, Graph) {
+gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function QueryCtrl($scope, Query) {
 
     $scope.editMode = false;
 
     $scope.init = function(query){
         $scope.query = query;
         $scope.invocations = Query.invocations({id: query.id});
-        //$scope.graphs = Query.graphs({id: query.id});
-        //console.log($scope.graphs);
         console.log($scope.invocations);
-        console.log("youduderino")
         listenForUpdates();
     };
 
@@ -62,14 +59,6 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', 'Graph', func
     };
 }]);
 
-gradlePrismControllers.controller('GraphCtrl', ['$scope', 'Graph', function GraphCtrl($scope, Graph) {
-    $scope.init = function(graph){
-        $scope.graph = graph;
-        console.log(graph)
-    }
-}]);
-
-
 gradlePrismControllers.controller('InvocationCtrl', ['$scope', function InvocationCtrl($scope) {
     $scope.init = function(invocation){
         $scope.invocation = invocation;
@@ -84,14 +73,5 @@ gradlePrismControllers.controller('TaskCtrl', ['$scope', function TaskCtrl($scop
     $scope.init = function(task){
         $scope.task = task;
     }
-
-//    $scope.status = function(){
-//        console.log($scope.task);
-//        if ($scope.task.success){
-//            return "success"
-//        } else {
-//            return "fail"
-//        }
-//    }
 }]);
 

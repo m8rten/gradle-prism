@@ -1,6 +1,6 @@
-package com.m8rten.gradle.prism.query
+package com.m8rten.gradle.prism.model.query
 
-import com.m8rten.gradle.prism.model.Invocation
+import com.m8rten.gradle.prism.model.invocation.Invocation
 
 class Result {
 

@@ -15,11 +15,6 @@ gradlePrismServices.factory('Query', ['$resource',
                     isArray: true,
                     params: { action: 'invocations'}
                 },
-                graphs : {
-                    method:'GET',
-                    isArray: true,
-                    params: { action: 'graph'}
-                },
                 waitUntilUpdated : {
                     method:'GET',
                     params: { action: 'waitUntilUpdated'}
@@ -27,29 +22,6 @@ gradlePrismServices.factory('Query', ['$resource',
                 delete : {
                     method:'DELETE'
                 }
-            }
-        );
-    }]);
-
-gradlePrismServices.factory('Graph', ['$resource',
-    function($resource){
-        return $resource(
-            'api/query/:queryId/graph/:id',
-            {
-                id: '@id'
-            },{
-//                invocations : {
-//                    method:'GET',
-//                    isArray: true,
-//                    params: { action: 'invocations'}
-//                },
-//                waitUntilUpdated : {
-//                    method:'GET',
-//                    params: { action: 'waitUntilUpdated'}
-//                },
-//                delete : {
-//                    method:'DELETE'
-//                }
             }
         );
     }]);

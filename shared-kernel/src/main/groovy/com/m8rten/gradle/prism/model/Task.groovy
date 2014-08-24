@@ -1,6 +1,6 @@
 package com.m8rten.gradle.prism.model
 
-class SuperTask {
+class Task {
     boolean success
     String name
     String failedMessage
