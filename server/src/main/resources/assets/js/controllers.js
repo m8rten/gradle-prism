@@ -46,9 +46,13 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function Quer
     }
 
     $scope.saveQuery = function() {
-        $scope.query.$save(function() {
 
+        console.log("saving...");
+
+        $scope.query.$save(function() {
+            console.log("saved!");
         })
+        $scope.toggleEditMode()
     };
 
     var listenForUpdates = function() {

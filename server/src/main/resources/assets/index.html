@@ -42,14 +42,15 @@
 
                         <input type="text" ng-model="query.mongoQuery" class="form-control flat"/>
 
-                        <button ng-click="toggleEditMode()" class="btn btn-warning btn-lg">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-
                     </form>
 
-                    <button type="submit" ng-click="toggleEditMode()" class="btn btn-default btn-lg">
+
+                    <button type="submit" ng-click="saveQuery()" class="btn btn-default btn-lg">
                         <span class="glyphicon glyphicon-floppy-save"></span>
+                    </button>
+
+                    <button ng-click="toggleEditMode()" class="btn btn-warning btn-lg">
+                        <span class="glyphicon glyphicon-remove"></span>
                     </button>
 
                     <button ng-click="removeQuery(query)" class="btn btn-danger btn-lg">

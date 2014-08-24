@@ -10,6 +10,8 @@ class Query implements InvocationListener {
 
     String mongoQuery
 
+    //Statistics statistics = new Statistics()
+
     Result result = new Result()
 
     String id = UUID.randomUUID().toString()

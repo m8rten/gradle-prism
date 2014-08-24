@@ -1,6 +1,5 @@
 package com.m8rten.gradle.prism.rest
 
-
 import com.m8rten.gradle.prism.model.query.Query
 import com.m8rten.gradle.prism.model.query.QueryContainer
 import com.yammer.metrics.annotation.Timed
@@ -17,12 +16,8 @@ public class QueryResource {
 
     @POST
     @Consumes("application/json")
-    public Response addOrUpdate(Query query) {
-        if (queries.contains(query.id)){
-            Response.ok(queries.update(query), MediaType.APPLICATION_JSON).build()
-        } else {
-            Response.ok(queries.add(query), MediaType.APPLICATION_JSON).build()
-        }
+    public Response add(Query query) {
+        Response.ok(queries.add(query), MediaType.APPLICATION_JSON).build()
     }
 
     @GET
@@ -59,6 +54,13 @@ public class QueryResource {
     public Response waitUntilUpdated(@PathParam("uuid") String id) {
         query(id).waitUntilUpdated()
         Response.ok().build()
+    }
+
+    @POST
+    @Timed
+    @Path("{uuid}")
+    public Response update(@PathParam("uuid") String id, Query query) {
+        Response.ok(queries.update(query), MediaType.APPLICATION_JSON).build()
     }
 
     Query query(String id){
