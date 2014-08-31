@@ -10,7 +10,7 @@ class Query implements InvocationListener {
 
     String mongoQuery
 
-    //Statistics statistics = new Statistics()
+    Statistics statistics = new Statistics()
 
     Result result = new Result()
 
@@ -18,7 +18,7 @@ class Query implements InvocationListener {
 
     private InvocationRepository repository
 
-    private boolean noNewInvocations = true
+    private boolean waitingForUpdate = true
 
     Query(){}
 
@@ -31,16 +31,18 @@ class Query implements InvocationListener {
 
     void run(){
         result.updateWith(repository.run(mongoQuery))
+        statistics.updateWith(result)
     }
 
     void changeAttributesToMatch(Query query) {
         this.name = query.name
         this.mongoQuery = query.mongoQuery
+        hasBeenUpdated()
     }
 
     void waitUntilUpdated(){
-        noNewInvocations=true
-        while(noNewInvocations){
+        waitingForUpdate = true
+        while(waitingForUpdate){
             sleep(1000)
         }
     }
@@ -48,6 +50,10 @@ class Query implements InvocationListener {
     @Override
     void invocationHasHappend(InvocationEvent event) {
         run()
-        noNewInvocations=false
+        hasBeenUpdated()
+    }
+
+    private void hasBeenUpdated(){
+        waitingForUpdate = false
     }
 }
