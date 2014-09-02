@@ -2,33 +2,13 @@ apply plugin: 'signing'
 apply plugin: 'maven-publish'
 
 group = 'se.m8rten.gradle-prism'
-//version = '0.0.1'
 version = 'HEAD-SNAPSHOT'
-
-//configurations.all {
-//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-//        if (details.requested.name == 'groovy') {
-//            //prefer 'groovy-all' over 'groovy':
-//            details.useTarget group: details.requested.group, name: 'groovy-all', version: '1.8.6'
-//        }
-//    }
-//}
 
 configurations {
     includeInJar
 }
 
 dependencies {
-
-    // Old
-    //compile "org.json:json:20090211"
-    //compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.2'
-    //compile gradleApi()
-    //compile project(':shared-kernel')
-    //includeInJar 'org.codehaus.groovy.modules.http-builder:http-builder:0.5.2'
-    //includeInJar project(':shared-kernel')
-
-    // New
     compile gradleApi()
     compile project(':shared-kernel')
     compile('org.codehaus.groovy.modules.http-builder:http-builder:0.6') {
