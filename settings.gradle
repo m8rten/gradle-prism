@@ -1,1 +1,2 @@
-include 'plugin','server','shared-kernel' ,'plugin:src:test:integration'
+include 'plugin','server','shared-kernel'
+//,'plugin:src:test:integration'
