@@ -1,7 +1,7 @@
 package com.m8rten.gradle.prism.boilerplate
 
 import com.mongodb.Mongo
-import com.yammer.dropwizard.lifecycle.Managed
+import io.dropwizard.lifecycle.Managed
 
 class MongoManaged implements Managed {
 

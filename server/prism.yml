@@ -2,8 +2,4 @@ mongohost: localhost
 mongoport: 27017
 mongodb: prismdb
 template: Hello, %s!
-http:
-  rootPath: /api/*
-assets:
-  overrides:
-    /: src/main/resources/assets/
+

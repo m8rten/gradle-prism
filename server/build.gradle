@@ -1,11 +1,12 @@
 apply plugin: 'application'
 
 dependencies {
-    compile 'com.yammer.dropwizard:dropwizard-core:0.6.1'
+    compile 'io.dropwizard:dropwizard-core:0.7.0'
+    compile 'io.dropwizard:dropwizard-assets:0.7.0'
     compile 'org.jongo:jongo:0.4'
     compile 'org.mongodb:mongo-java-driver:2.11.3'
-    compile 'com.sun.jersey:jersey-client:1.14'
-    compile 'com.bazaarvoice.dropwizard:dropwizard-configurable-assets-bundle:0.1.11'
+    compile 'com.sun.jersey:jersey-client:1.18.1'
+    //compile 'com.bazaarvoice.dropwizard:dropwizard-configurable-assets-bundle:0.2.1'
     compile project(':shared-kernel')
 }
 

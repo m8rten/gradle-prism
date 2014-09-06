@@ -1,17 +1,13 @@
 package com.m8rten.gradle.prism.boilerplate
 
-import com.bazaarvoice.dropwizard.assets.AssetsBundleConfiguration
-import com.bazaarvoice.dropwizard.assets.AssetsConfiguration
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.yammer.dropwizard.config.Configuration
+import io.dropwizard.Configuration
 import org.hibernate.validator.constraints.NotEmpty
 
-import javax.validation.Valid
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
-import javax.validation.constraints.NotNull
 
-public class PrismConfiguration extends Configuration implements AssetsBundleConfiguration{
+public class PrismConfiguration extends Configuration {
     @NotEmpty
     @JsonProperty
     private String template;
@@ -20,14 +16,25 @@ public class PrismConfiguration extends Configuration implements AssetsBundleCon
     @JsonProperty
     private String defaultName = "Stranger";
 
+    @JsonProperty
     public String getTemplate() {
         return template;
     }
 
+    @JsonProperty
     public String getDefaultName() {
         return defaultName;
     }
 
+    @JsonProperty
+    public void setTemplate(String template) {
+        this.template = template;
+    }
+
+    @JsonProperty
+    public void setDefaultName(String name) {
+        this.defaultName = name;
+    }
     @JsonProperty @NotEmpty
     public String mongohost = "localhost";
 
@@ -38,14 +45,4 @@ public class PrismConfiguration extends Configuration implements AssetsBundleCon
 
     @JsonProperty @NotEmpty
     public String mongodb = "prismdb";
-
-    @Valid
-    @NotNull
-    @JsonProperty
-    private final AssetsConfiguration assets = new AssetsConfiguration()
-
-    @Override
-    AssetsConfiguration getAssetsConfiguration() {
-        return assets
-    }
 }
