@@ -2,4 +2,6 @@ mongohost: localhost
 mongoport: 27017
 mongodb: prismdb
 template: Hello, %s!
-
+server:
+  type: simple
+  applicationContextPath: /  # Default value*

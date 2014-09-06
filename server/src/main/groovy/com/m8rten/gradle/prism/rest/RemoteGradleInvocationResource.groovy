@@ -1,7 +1,7 @@
 package com.m8rten.gradle.prism.rest
 
-import com.m8rten.gradle.prism.model.invocation.Invocation
-import com.m8rten.gradle.prism.model.RemoteGradleInvocation
+
+import com.m8rten.gradle.prism.model.Invocation
 import com.m8rten.gradle.prism.model.invocation.InvocationRepository
 
 import javax.ws.rs.Consumes
@@ -19,8 +19,7 @@ public class RemoteGradleInvocationResource {
 
     @POST
     @Consumes("application/json")
-    public Response postInvocation(RemoteGradleInvocation remoteGradleInvocation) {
-        Invocation invocation = new Invocation(remoteGradleInvocation)
+    public Response postInvocation(Invocation invocation) {
         invocation.time = new Date()
         invocations.insert(invocation)
         Response.noContent().build()

@@ -1,8 +1,6 @@
 package com.m8rten.gradle.prism.model.invocation
 
-import com.m8rten.gradle.prism.model.invocation.Invocation
-import com.m8rten.gradle.prism.model.invocation.InvocationEvent
-import com.m8rten.gradle.prism.model.invocation.InvocationListener
+import com.m8rten.gradle.prism.model.Invocation
 import com.mongodb.DB
 import groovy.beans.ListenerList
 import org.jongo.Jongo

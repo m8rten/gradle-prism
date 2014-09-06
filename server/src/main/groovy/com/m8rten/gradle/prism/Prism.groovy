@@ -21,10 +21,7 @@ public class Prism extends Application<PrismConfiguration> {
 
     @Override
     public void initialize(Bootstrap<PrismConfiguration> bootstrap) {
-        //bootstrap.setName("gradle-prism");
-        //bootstrap.addBundle(new AssetsBundle("/assets/", "/"));
-        //bootstrap.addBundle(new ConfiguredAssetsBundle("/assets", "/", "index.html", "static"));
-        bootstrap.addBundle(new AssetsBundle("/assets/", "/prism", "index.html"))
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/", "index.html"))
     }
 
     @Override
@@ -38,6 +35,7 @@ public class Prism extends Application<PrismConfiguration> {
 
         MongoManaged mongoManaged = new MongoManaged(mongo);
         environment.lifecycle().manage(mongoManaged);
+        environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(new RemoteGradleInvocationResource(invocations: superInvocations))
         environment.jersey().register(new QueryResource(queries: containter))
     }

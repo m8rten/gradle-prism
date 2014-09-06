@@ -1,6 +1,7 @@
 package com.m8rten.gradle.prism.model
 
-class RemoteGradleInvocation {
+class Invocation {
     User user
     List<Project> projects = []
+    Date time
 }

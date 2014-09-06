@@ -1,5 +1,6 @@
 package com.m8rten.gradle.prism.plugin
-import com.m8rten.gradle.prism.model.RemoteGradleInvocation
+
+import com.m8rten.gradle.prism.model.Invocation
 import groovyx.net.http.RESTClient
 import org.gradle.BuildResult
 import org.gradle.StartParameter
@@ -9,7 +10,7 @@ import spock.lang.Specification
 
 class SpySpecification extends Specification {
 
-    def gradleInvocation = Mock(RemoteGradleInvocation)
+    def gradleInvocation = Mock(Invocation)
 
     def restClient = Mock(RESTClient)
 

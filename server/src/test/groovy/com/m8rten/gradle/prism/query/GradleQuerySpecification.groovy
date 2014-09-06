@@ -1,13 +1,12 @@
 package com.m8rten.gradle.prism.query
 
-import com.m8rten.gradle.prism.model.invocation.Invocation
-import com.m8rten.gradle.prism.model.query.Query
+import com.m8rten.gradle.prism.model.Invocation
 import com.m8rten.gradle.prism.model.invocation.InvocationRepository
+import com.m8rten.gradle.prism.model.query.Query
 import com.m8rten.gradle.prism.model.query.QueryContainer
-
-//import org.mongojack.DBQuery
 import spock.lang.Specification
 
+//import org.mongojack.DBQuery
 class GradleQuerySpecification extends Specification{
 
 
