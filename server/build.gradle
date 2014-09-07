@@ -8,6 +8,7 @@ dependencies {
     compile 'com.sun.jersey:jersey-client:1.18.1'
     //compile 'com.bazaarvoice.dropwizard:dropwizard-configurable-assets-bundle:0.2.1'
     compile project(':shared-kernel')
+    compile 'joda-time:joda-time:2.4'
 }
 
 mainClassName = "com.m8rten.gradle.prism.PrismService"

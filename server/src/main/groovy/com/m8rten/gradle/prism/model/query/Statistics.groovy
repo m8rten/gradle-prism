@@ -1,19 +1,16 @@
 package com.m8rten.gradle.prism.model.query
+import com.m8rten.gradle.prism.model.Invocation
 
 class Statistics {
 
-    Map<Date, Integer> invocationsPerDay = new HashMap<>()
+    StatisticsForTimePeriod invocationsPerDay = new StatisticsForTimePeriod()
+    StatisticsForTimePeriod invocationsPerWeek = new StatisticsForTimePeriod()
+    StatisticsForTimePeriod invocationsPerMonth = new StatisticsForTimePeriod()
 
-    void updateWith(Result result) {
-        invocationsPerDay = new HashMap<>()
-        result.invocations.each {
-            Date date = ((Date) it.time.clone()).clearTime()
-            if (invocationsPerDay.containsKey(date)){
-                invocationsPerDay.put(date, invocationsPerDay.get(date) + 1)
-            } else {
-                invocationsPerDay.put(date,0)
-            }
-        }
+    void updateWith(List<Invocation> invocations) {
+        invocationsPerDay.updateWith(invocations)
+        invocationsPerMonth.updateWith(invocations)
+        invocationsPerWeek.updateWith(invocations)
     }
 }
 

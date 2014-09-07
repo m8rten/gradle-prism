@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <title>My AngularJS App</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular-resource.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/flat-ui.css" rel="stylesheet">
@@ -19,8 +19,10 @@
     <div class = "query-container" ng-controller="QueryContainerCtrl" ng-init="init()">
 
         <form ng-submit="addQuery()">
+            <input type="text" ng-model="name"
+                   placeholder="name" class="form-control flat"/>
             <input type="text" ng-model="mongoQuery"
-                   placeholder="add query here" class="form-control flat"/>
+                   placeholder="query" class="form-control flat"/>
 
             <input class="btn btn-mini" type="submit" value="add">
         </form>

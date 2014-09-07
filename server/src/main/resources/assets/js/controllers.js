@@ -11,7 +11,7 @@ gradlePrismControllers.controller('QueryContainerCtrl',  ['$scope', 'Query', fun
     };
 
     $scope.addQuery = function() {
-        var query = new Query({mongoQuery: $scope.mongoQuery, name: "Test Query"});
+        var query = new Query({mongoQuery: $scope.mongoQuery, name: $scope.name});
         query.$save(function() {
             $scope.queries.push(query);
         })

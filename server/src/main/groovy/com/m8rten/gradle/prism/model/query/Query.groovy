@@ -31,7 +31,7 @@ class Query implements InvocationListener {
 
     void run(){
         result.updateWith(repository.run(mongoQuery))
-        statistics.updateWith(result)
+        statistics.updateWith(result.invocations)
     }
 
     void changeAttributesToMatch(Query query) {
