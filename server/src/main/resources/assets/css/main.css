@@ -23,13 +23,27 @@ div.query{
     float: left;
 }
 
-div.query-header{
+div.query-view {
     width: 30px;
     display: inline;
 }
-div.query-header h4 {
-    width: 30px;
-    display: inline;
+
+h3, h4, h5, h6 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Doesn't feel good but I don't know how to do this in a better way, */
+span.name {
+    width: 90%;
+    float: left;
+}
+span.settings {
+    float: right;
+}
+span.show-invocations {
+    float: right;
+    margin-top: 30px;
 }
 
 div.query-edit input {

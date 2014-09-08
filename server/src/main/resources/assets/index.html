@@ -31,11 +31,18 @@
 
             <div class="switch-container" ng-switch on="editMode">
 
-                <div ng-switch-when="false" class="query-header">
-                    <h4>{{query.name}}</h4>
-                    <span ng-click="toggleEditMode()" class="glyphicon glyphicon-cog"></span>
+                <div ng-switch-when="false" class="query-view">
+                    <span class="name"><h4>{{query.name}}</h4></span>
+                    <span ng-click="toggleEditMode()" class="settings glyphicon glyphicon-cog"></span>
+                    <span class="name"><h3>{{query.statistics.invocationsPerMonth.current}} {{query.statistics.invocationsPerWeek.current}} {{query.statistics.invocationsPerDay.current}}</h3></span>
+                    <span ng-click="toggleShowInvocations()" class="show-invocations glyphicon glyphicon-arrow-{{showInvocations && 'up' || 'down'}}"></span>
+                    <div style='clear:both'></div>
+                    <div ng-switch-when="false" class="query-header">
+                        <h4>{{query.statistics.invocationsPerDay.current}}</h4>
+                        <h4>{{query.statistics.invocationsPerWeek.current}}</h4>
+                        <h4>{{query.statistics.invocationsPerMonth.current}}</h4>
+                    </div>
                 </div>
-
                 <div ng-switch-when="true" class="query-edit">
 
                     <form ng-submit="saveQuery()">
@@ -59,23 +66,22 @@
                         <span class="glyphicon glyphicon-trash"></span>
                     </button>
                 </div>
+                <ul ng-show="showInvocations" class="invocations">
+
+                    <li class="invocation" ng-repeat="invocation in invocations" ng-controller="InvocationCtrl" ng-init="init(invocation)">
+                        <div class="invocation-header">
+                            <small><b>{{time()}}, {{invocation.user.name}}</b></small>
+                        </div>
+                        <ul class="projects">
+                            <li class="project" ng-repeat="project in invocation.projects">
+                                <small class="bubble projectname"><b>{{project.name}}</b></small>
+                                <small class="bubble task-success-{{task.success}}" ng-repeat="task in project.tasks" ng-controller="TaskCtrl" ng-init="init(task)">{{task.name}} </small>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
             </div>
-
-            <ul class="invocations">
-
-                <li class="invocation" ng-repeat="invocation in invocations" ng-controller="InvocationCtrl" ng-init="init(invocation)">
-                    <div class="invocation-header">
-                        <small><b>{{time()}}, {{invocation.user.name}}</b></small>
-                    </div>
-                    <ul class="projects">
-                        <li class="project" ng-repeat="project in invocation.projects">
-                            <small class="bubble projectname"><b>{{project.name}}</b></small>
-                            <small class="bubble task-success-{{task.success}}" ng-repeat="task in project.tasks" ng-controller="TaskCtrl" ng-init="init(task)">{{task.name}} </small>
-                        </li>
-                    </ul>
-
-                </li>
-            </ul>
 
         </div>
     </div>

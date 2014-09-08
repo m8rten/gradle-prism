@@ -43,7 +43,7 @@ public class QueryResource {
     @GET
     @Path("{uuid}/invocations")
     public Response invocations(@PathParam("uuid") String id) {
-        Response.ok(query(id).result.invocations, MediaType.APPLICATION_JSON).build()
+        Response.ok(query(id).invocations, MediaType.APPLICATION_JSON).build()
     }
 
     @GET

@@ -20,21 +20,21 @@ class StatisticsForTimePeriodSpecification extends Specification{
         statistics.updateWith(invocations)
 
         then:
-        statistics.invocationsForCurrentTimePeriod == 2
+        statistics.current == 2
 
         when:
         invocations << invocationWith(dateAtFirstDayOfWeek {plusWeeks 3})
         statistics.updateWith(invocations)
 
         then:
-        statistics.invocationsForCurrentTimePeriod == 2
+        statistics.current == 2
 
         when:
         invocations << invocationWith(dateAtFirstDayOfWeek {plusDays 4})
         statistics.updateWith(invocations)
 
         then:
-        statistics.invocationsForCurrentTimePeriod == 3
+        statistics.current == 3
     }
 
 
@@ -52,17 +52,17 @@ class StatisticsForTimePeriodSpecification extends Specification{
         statistics.updateWith(invocations)
 
         then: 'Then ...'
-        statistics.invocationsPerTimePeriod.size() == 1
-        statistics.invocationsPerTimePeriod.get(dateAtFirstDayOfWeek {plusHours 0}) == 2
+        statistics.perTimePeriod.size() == 1
+        statistics.perTimePeriod.get(dateAtFirstDayOfWeek {plusHours 0}) == 2
 
         when:
         invocations << invocationWith(dateAtFirstDayOfWeek {plusDays 2})
         statistics.updateWith(invocations)
 
         then:
-        statistics.invocationsPerTimePeriod.size() == 2
-        statistics.invocationsPerTimePeriod.get(dateAtFirstDayOfWeek {plusHours 0}) == 2
-        statistics.invocationsPerTimePeriod.get(dateAtFirstDayOfWeek {plusDays 2}) == 1
+        statistics.perTimePeriod.size() == 2
+        statistics.perTimePeriod.get(dateAtFirstDayOfWeek {plusHours 0}) == 2
+        statistics.perTimePeriod.get(dateAtFirstDayOfWeek {plusDays 2}) == 1
     }
 
     def invocationWith(Date date) {

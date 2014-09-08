@@ -5,9 +5,9 @@ import org.joda.time.DateTime
 
 class StatisticsForTimePeriod {
 
-    Map<Date, Integer> invocationsPerTimePeriod
+    Map<Date, Integer> perTimePeriod
 
-    int invocationsForCurrentTimePeriod
+    int current
 
     private timePeriodSelectionAlgorithm
 
@@ -18,21 +18,21 @@ class StatisticsForTimePeriod {
     }
 
     void updateWith(List<Invocation> invocations){
-        invocationsForCurrentTimePeriod = 0
+        current = 0
         Date modifiedCurrentDateTime = timePeriodSelectionAlgorithm.rehydrate(new DateTime(),this,this)().toDate()
 
-        invocationsPerTimePeriod = [:]
+        perTimePeriod = [:]
         invocations.each {
             DateTime dateTimeForInvocation = new DateTime(it.time)
             def modifiedDayTime = timePeriodSelectionAlgorithm.rehydrate(dateTimeForInvocation, this, this)
             Date time = modifiedDayTime().toDate()
-            if (invocationsPerTimePeriod.containsKey(time)){
-                invocationsPerTimePeriod.put(time, invocationsPerTimePeriod.get(time) + 1)
+            if (perTimePeriod.containsKey(time)){
+                perTimePeriod.put(time, perTimePeriod.get(time) + 1)
             } else {
-                invocationsPerTimePeriod.put(time,1)
+                perTimePeriod.put(time,1)
             }
             if(modifiedCurrentDateTime.equals(time)){
-                invocationsForCurrentTimePeriod++
+                current++
             }
         }
     }

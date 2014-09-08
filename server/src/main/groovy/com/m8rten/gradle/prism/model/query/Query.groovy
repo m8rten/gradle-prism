@@ -1,5 +1,6 @@
 package com.m8rten.gradle.prism.model.query
 
+import com.m8rten.gradle.prism.model.Invocation
 import com.m8rten.gradle.prism.model.invocation.InvocationEvent
 import com.m8rten.gradle.prism.model.invocation.InvocationListener
 import com.m8rten.gradle.prism.model.invocation.InvocationRepository
@@ -12,7 +13,7 @@ class Query implements InvocationListener {
 
     Statistics statistics = new Statistics()
 
-    Result result = new Result()
+    List<Invocation> invocations
 
     String id = UUID.randomUUID().toString()
 
@@ -30,8 +31,8 @@ class Query implements InvocationListener {
     }
 
     void run(){
-        result.updateWith(repository.run(mongoQuery))
-        statistics.updateWith(result.invocations)
+        invocations = repository.run(mongoQuery)
+        statistics.updateWith(invocations)
     }
 
     void changeAttributesToMatch(Query query) {
@@ -53,7 +54,7 @@ class Query implements InvocationListener {
         hasBeenUpdated()
     }
 
-    private void hasBeenUpdated(){
+    void hasBeenUpdated(){
         waitingForUpdate = false
     }
 }

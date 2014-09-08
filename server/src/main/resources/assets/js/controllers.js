@@ -32,10 +32,12 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function Quer
 
     $scope.editMode = false;
 
+    $scope.showInvocations = false;
+
     $scope.init = function(query){
         $scope.query = query;
-        $scope.invocations = Query.invocations({id: query.id});
-        console.log($scope.invocations);
+        $scope.id = query.id;
+        $scope.invocations = query.invocations
         listenForUpdates();
     };
 
@@ -43,6 +45,12 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function Quer
         if($scope.editMode)
             $scope.editMode = false;
         else $scope.editMode = true;
+    }
+
+    $scope.toggleShowInvocations = function(){
+        if($scope.showInvocations)
+            $scope.showInvocations = false;
+        else $scope.showInvocations = true;
     }
 
     $scope.saveQuery = function() {
@@ -57,8 +65,10 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function Quer
 
     var listenForUpdates = function() {
         Query.waitUntilUpdated({id: $scope.query.id}, function(){
-            $scope.invocations = Query.invocations({id: $scope.query.id});
-            listenForUpdates()
+            $scope.query = Query.get({id: $scope.query.id}, function(){
+                console.log($scope.query)
+                listenForUpdates()
+            });
         });
     };
 }]);

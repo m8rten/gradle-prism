@@ -26,6 +26,7 @@ class QueryContainer {
     }
 
     Query delete(String id) {
+        queries.get(id).hasBeenUpdated()
         queries.remove(id)
     }
 

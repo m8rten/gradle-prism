@@ -21,6 +21,9 @@ gradlePrismServices.factory('Query', ['$resource',
                 },
                 delete : {
                     method:'DELETE'
+                },
+                get : {
+                    method: 'GET'
                 }
             }
         );
