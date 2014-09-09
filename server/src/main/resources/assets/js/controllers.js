@@ -8,6 +8,7 @@ gradlePrismControllers.controller('QueryContainerCtrl',  ['$scope', 'Query', fun
 
     $scope.init = function(){
         $scope.queries = Query.query();
+        listenForUpdates()
     };
 
     $scope.addQuery = function() {
@@ -18,12 +19,19 @@ gradlePrismControllers.controller('QueryContainerCtrl',  ['$scope', 'Query', fun
     };
 
     $scope.removeQuery = function(query) {
-        /* Clean up this mess, it should be without messag*/
-//        query.$delete(function(){
         Query.delete({id: query.id}, function(){
             var index = $scope.queries.indexOf(query);
             $scope.queries.splice(index, 1);
         })
+    };
+
+    var listenForUpdates = function() {
+        Query.waitUntilUpdated(function(ids){
+            ids.forEach(function(id){
+                $scope.$broadcast("updateHasHappend", {id: id});
+            });
+            listenForUpdates();
+        });
     };
 }]);
 
@@ -38,7 +46,6 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function Quer
         $scope.query = query;
         $scope.id = query.id;
         $scope.invocations = query.invocations
-        listenForUpdates();
     };
 
     $scope.toggleEditMode = function(){
@@ -54,23 +61,17 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function Quer
     }
 
     $scope.saveQuery = function() {
-
-        console.log("saving...");
-
-        $scope.query.$save(function() {
-            console.log("saved!");
-        })
+        $scope.query.$save();
         $scope.toggleEditMode()
     };
 
-    var listenForUpdates = function() {
-        Query.waitUntilUpdated({id: $scope.query.id}, function(){
-            $scope.query = Query.get({id: $scope.query.id}, function(){
-                console.log($scope.query)
-                listenForUpdates()
+    $scope.$on("updateHasHappend", function (event, args) {
+        if($scope.query.id == args.id){
+            Query.get({id: $scope.query.id}, function(query){
+                $scope.query = query;
             });
-        });
-    };
+        }
+    });
 }]);
 
 gradlePrismControllers.controller('InvocationCtrl', ['$scope', function InvocationCtrl($scope) {

@@ -19,7 +19,7 @@ class Query implements InvocationListener {
 
     private InvocationRepository repository
 
-    private boolean waitingForUpdate = true
+    private boolean hasBeenUpdated = true
 
     Query(){}
 
@@ -38,12 +38,12 @@ class Query implements InvocationListener {
     void changeAttributesToMatch(Query query) {
         this.name = query.name
         this.mongoQuery = query.mongoQuery
-        hasBeenUpdated()
+        this.hasBeenUpdated = true
     }
 
     void waitUntilUpdated(){
-        waitingForUpdate = true
-        while(waitingForUpdate){
+        hasBeenUpdated = true
+        while(hasBeenUpdated){
             sleep(1000)
         }
     }
@@ -51,10 +51,14 @@ class Query implements InvocationListener {
     @Override
     void invocationHasHappend(InvocationEvent event) {
         run()
-        hasBeenUpdated()
+        hasBeenUpdated = true
     }
 
-    void hasBeenUpdated(){
-        waitingForUpdate = false
+    boolean hasBeenUpdated(){
+        hasBeenUpdated
+    }
+
+    boolean waitForUpdate(){
+        hasBeenUpdated = false
     }
 }

@@ -55,6 +55,12 @@ public class QueryResource {
         Response.ok().build()
     }
 
+    @GET
+    @Path("waitUntilUpdated")
+    public Response waitUntilUpdated() {
+        Response.ok(queries.waitUntilUpdated(), MediaType.APPLICATION_JSON).build()
+    }
+
     @POST
     @Path("{uuid}")
     public Response update(@PathParam("uuid") String id, Query query) {

@@ -17,6 +17,7 @@ gradlePrismServices.factory('Query', ['$resource',
                 },
                 waitUntilUpdated : {
                     method:'GET',
+                    isArray: true,
                     params: { action: 'waitUntilUpdated'}
                 },
                 delete : {

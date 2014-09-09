@@ -26,7 +26,6 @@ class QueryContainer {
     }
 
     Query delete(String id) {
-        queries.get(id).hasBeenUpdated()
         queries.remove(id)
     }
 
@@ -44,5 +43,17 @@ class QueryContainer {
 
     List<Query> list(){
         queries.values().asList()
+    }
+
+    List<Query> waitUntilUpdated() {
+        def updatedQueries  = [:]
+        while(updatedQueries.isEmpty()){
+            updatedQueries = queries.findAll {id,query -> query.hasBeenUpdated()}
+            sleep(1000)
+        }
+        updatedQueries.each {id, query ->
+            query.waitForUpdate()
+        }
+        updatedQueries.keySet().asList()
     }
 }
