@@ -45,7 +45,7 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope','$timeout', 'Query', fu
     $scope.init = function(query){
         $scope.query = query;
         $scope.id = query.id;
-        $scope.invocations = query.invocations
+        $scope.invocations = query.invocations.reverse()
     };
 
     $scope.toggleEditMode = function(){
@@ -71,7 +71,7 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope','$timeout', 'Query', fu
 
                 /* update model */
                 $scope.query = query;
-                $scope.invocations = query.invocations
+                $scope.invocations = query.invocations.reverse()
 
                 /* Do animation */
                 $scope.animation = 'flash-red';
