@@ -36,7 +36,7 @@ gradlePrismControllers.controller('QueryContainerCtrl',  ['$scope', 'Query', fun
 }]);
 
 
-gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function QueryCtrl($scope, Query) {
+gradlePrismControllers.controller('QueryCtrl', ['$scope','$timeout', 'Query', function QueryCtrl($scope, $timeout, Query) {
 
     $scope.editMode = false;
 
@@ -69,6 +69,9 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope', 'Query', function Quer
         if($scope.query.id == args.id){
             Query.get({id: $scope.query.id}, function(query){
                 $scope.query = query;
+                /* Do animation */
+                $scope.animation = 'flash-red';
+                $timeout(function(){$scope.animation = ''}, 3000);
             });
         }
     });

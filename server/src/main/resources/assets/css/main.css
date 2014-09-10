@@ -23,6 +23,16 @@ div.query{
     float: left;
 }
 
+.flash-red{
+    -webkit-animation: myfirst 1s; /* Chrome, Safari, Opera */
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst {
+    0%   {background: #E74C3C;}
+    100%  {background: #16A085;}
+}
+
 div.query-view {
     width: 30px;
     display: inline;
