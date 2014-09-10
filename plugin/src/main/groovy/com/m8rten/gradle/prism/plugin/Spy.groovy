@@ -1,6 +1,7 @@
 package com.m8rten.gradle.prism.plugin
 
 import com.m8rten.gradle.prism.model.SuperUser
+import com.m8rten.gradle.prism.model.User
 import groovyx.net.http.ContentType
 import groovyx.net.http.RESTClient
 import org.gradle.BuildListener
@@ -20,12 +21,12 @@ class Spy implements BuildListener {
 
     String userName = System.getProperty('user.name')
 
-    RemoteGradleInvocationBuilder superGradleInvocation = new RemoteGradleInvocationBuilder()
+    InvocationBuilder invocationBuilder = new InvocationBuilder()
 
     Spy(Project project) {
         project.gradle.addBuildListener(this)
         project.gradle.taskGraph.afterTask {Task task ->
-            superGradleInvocation.add(task)
+            invocationBuilder.add(task)
         }
     }
 
@@ -35,11 +36,11 @@ class Spy implements BuildListener {
 
     @Override
     void buildFinished(BuildResult buildResult) {
-        superGradleInvocation.user = new SuperUser(name: userName)
+        invocationBuilder.user = new User(name: userName)
         restClient.uri = url
         restClient.contentType = ContentType.JSON
         try {
-            restClient.post(body: superGradleInvocation)
+            restClient.post(body: invocationBuilder)
         } catch (Exception e) {
             // Shhh... be quiet...
         }
