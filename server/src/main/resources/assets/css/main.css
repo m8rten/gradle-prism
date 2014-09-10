@@ -12,9 +12,9 @@ div.contaier{
     display:inline;
 }
 
-div.query{
+span.query{
     background-color: #16A085;
-    width: 30%;
+    max-width: 30%;
     padding: 0.25em;
     border-radius: 5px;
     margin-top: 1em;
@@ -25,10 +25,16 @@ div.query{
 
 .flash-red{
     -webkit-animation: myfirst 1s; /* Chrome, Safari, Opera */
+    animation: myfirst 1s;
 }
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes myfirst {
+    0%   {background: #E74C3C;}
+    100%  {background: #16A085;}
+}
+/* Standard syntax */
+@keyframes myfirst {
     0%   {background: #E74C3C;}
     100%  {background: #16A085;}
 }

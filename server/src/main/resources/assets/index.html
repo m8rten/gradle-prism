@@ -27,7 +27,7 @@
             <input class="btn btn-mini" type="submit" value="add">
         </form>
 
-        <div draggable="true" ng-class="animation" class="query" ng-repeat="query in queries" ng-controller="QueryCtrl" ng-init="init(query)" >
+        <span draggable="true" ng-class="animation" class="query" ng-repeat="query in queries" ng-controller="QueryCtrl" ng-init="init(query)" >
 
             <div class="switch-container" ng-switch on="editMode">
 
