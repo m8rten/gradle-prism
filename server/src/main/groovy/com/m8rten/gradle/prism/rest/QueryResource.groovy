@@ -47,15 +47,6 @@ public class QueryResource {
     }
 
     @GET
-    @Path("{uuid}/waitUntilUpdated")
-    public Response waitUntilUpdated(@PathParam("uuid") String id) {
-        if(queries.contains(id)) {
-            query(id).waitUntilUpdated()
-        }
-        Response.ok().build()
-    }
-
-    @GET
     @Path("waitUntilUpdated")
     public Response waitUntilUpdated() {
         Response.ok(queries.waitUntilUpdated(), MediaType.APPLICATION_JSON).build()
