@@ -12,9 +12,16 @@ div.contaier{
     display:inline;
 }
 
+div.add-query{
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    font-size: 30px;
+}
+
 span.query{
     background-color: #16A085;
-    max-width: 30%;
+    width: 30%;
     padding: 0.25em;
     border-radius: 5px;
     margin-top: 1em;

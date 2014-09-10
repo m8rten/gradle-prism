@@ -18,14 +18,24 @@
 
     <div class = "query-container" ng-controller="QueryContainerCtrl" ng-init="init()">
 
-        <form ng-submit="addQuery()">
-            <input type="text" ng-model="name"
-                   placeholder="name" class="form-control flat"/>
-            <input type="text" ng-model="mongoQuery"
-                   placeholder="query" class="form-control flat"/>
+        <div ng-click="addNew=true" class='add-query glyphicon glyphicon-plus-sign'></div>
 
-            <input class="btn btn-mini" type="submit" value="add">
-        </form>
+        <span class="query" ng-show="addNew">
+            <div class="query-edit">
+                <form ng-submit="addQuery()">
+                    <input type="text" ng-model="name" placeholder="name" class="form-control flat"/>
+                    <input type="text" ng-model="mongoQuery" placeholder="query" class="form-control flat"/>
+                 </form>
+
+                 <button type="submit" ng-click="addQuery();addNew=false" class="btn btn-default btn-lg">
+                     <span class="glyphicon glyphicon-floppy-save"></span>
+                 </button>
+
+                 <button ng-click="addNew=false" class="btn btn-warning btn-lg">
+                     <span class="glyphicon glyphicon-remove"></span>
+                 </button>
+            </div>
+        </span>
 
         <span draggable="true" ng-class="animation" class="query" ng-repeat="query in queries" ng-controller="QueryCtrl" ng-init="init(query)" >
 
@@ -46,13 +56,9 @@
                 <div ng-switch-when="true" class="query-edit">
 
                     <form ng-submit="saveQuery()">
-
                         <input type="text" ng-model="query.name" class="form-control flat"/>
-
                         <input type="text" ng-model="query.mongoQuery" class="form-control flat"/>
-
                     </form>
-
 
                     <button type="submit" ng-click="saveQuery()" class="btn btn-default btn-lg">
                         <span class="glyphicon glyphicon-floppy-save"></span>
@@ -83,7 +89,7 @@
                 </ul>
             </div>
 
-        </div>
+        </span>
     </div>
 </div>
 

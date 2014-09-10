@@ -14,7 +14,7 @@ gradlePrismControllers.controller('QueryContainerCtrl',  ['$scope', 'Query', fun
     $scope.addQuery = function() {
         var query = new Query({mongoQuery: $scope.mongoQuery, name: $scope.name});
         query.$save(function() {
-            $scope.queries.push(query);
+            $scope.queries.unshift(query);
         })
     };
 
@@ -68,7 +68,11 @@ gradlePrismControllers.controller('QueryCtrl', ['$scope','$timeout', 'Query', fu
     $scope.$on("updateHasHappend", function (event, args) {
         if($scope.query.id == args.id){
             Query.get({id: $scope.query.id}, function(query){
+
+                /* update model */
                 $scope.query = query;
+                $scope.invocations = query.invocations
+
                 /* Do animation */
                 $scope.animation = 'flash-red';
                 $timeout(function(){$scope.animation = ''}, 3000);
