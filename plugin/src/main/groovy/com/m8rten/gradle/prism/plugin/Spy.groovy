@@ -1,6 +1,5 @@
 package com.m8rten.gradle.prism.plugin
 
-import com.m8rten.gradle.prism.model.SuperUser
 import com.m8rten.gradle.prism.model.User
 import groovyx.net.http.ContentType
 import groovyx.net.http.RESTClient
