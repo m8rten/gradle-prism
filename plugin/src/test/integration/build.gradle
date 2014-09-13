@@ -5,6 +5,7 @@ buildscript {
 }
 
 apply plugin: 'prism'
+apply plugin: 'java'
 
 spy {
     url 'http://localhost:8080/api/superinvocation/'
