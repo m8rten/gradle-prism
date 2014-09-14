@@ -6,9 +6,11 @@ dependencies {
     compile 'org.jongo:jongo:1.1'
     compile 'org.mongodb:mongo-java-driver:2.12.3'
     compile 'com.sun.jersey:jersey-client:1.18.1'
+    compile 'memory-measurer:memory-measurer:1.0.rslemos-SNAPSHOT'
     //compile 'com.bazaarvoice.dropwizard:dropwizard-configurable-assets-bundle:0.2.1'
     compile project(':shared-kernel')
     compile 'joda-time:joda-time:2.4'
+    compile files('lib/object-explorer.jar')
 }
 
 mainClassName = "com.m8rten.gradle.prism.Prism"
