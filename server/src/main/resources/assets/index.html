@@ -18,7 +18,63 @@
 
     <div class = "query-container" ng-controller="QueryContainerCtrl" ng-init="init()">
 
+
+        <div class="help-text" ng-show="showHelp">
+            <h6>Model</h6>
+            <p>Each invocations are represented by the following model</p>
+<pre><code>{
+    user:{
+        name:'Marten'
+    },
+    projects:[{
+        tasks:[{
+            success:true,
+            name:'compileGroovy',
+            failedMessage:''
+        }],
+        name:'integration'
+    }],
+    time:1410205413400
+}</code></pre>
+
+            <h6>Query</h6>
+
+            <p>Queries are created using normal mongo syntax</p>
+
+            <a href='http://docs.mongodb.org/manual/reference/method/db.collection.find/'>
+                http://docs.mongodb.org/manual/reference/method/db.collection.find/
+            </a>
+            <a href='http://docs.mongodb.org/manual/reference/operator/query/'>
+                http://docs.mongodb.org/manual/reference/operator/query/
+            </a>
+
+            <h6>Examples</h6>
+
+            <p>
+            Finding all invocations that included task compileGroovy:<br>
+
+            <code>
+            {'projects.tasks.name': 'compileGroovy'}
+            </code><br>
+
+            Finding all invocations for project with name integration:<br>
+
+            <code>
+            {'projects.name': 'integration'}
+            </code><br>
+
+            Finding all invocations for project 'integration' that included task 'jar':<br>
+            <code>
+            { $and: [{ 'projects.name':'integration' }, { 'projects.tasks.name':'jar' } ] }
+            </code><br>
+            </p>
+        </div>
+
         <div ng-click="addNew=true" class='add-query glyphicon glyphicon-plus-sign'></div>
+        <div ng-click="showHelp = !showHelp" class='help glyphicon glyphicon-question-sign'></div>
+
+
+
 
         <span class="query" ng-show="addNew">
             <div class="query-edit">
